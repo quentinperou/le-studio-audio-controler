@@ -1,11 +1,11 @@
 # le-studio-audio-controler
 
-__FR__
+* __FR__
 
 Application servant à lire des fichiers audio. 
 Créer pour la lecture des fichier audio de la web radio de mon université "LeStudio" durant la période de confinement.
 
-__EN__
+* __EN__
 
 Application used to play audio files.
 Create for the playback of audio files of the web radio of my university "LeStudio" during the period of confinement.
