@@ -1,0 +1,18 @@
+{
+  "name": "lecteur-audio-le-studio",
+  "version": "1.2.0",
+  "description": "Un lecteur de fichier audio",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nw src/",
+    "prod": "nwbuild --platforms win64 --winIco logo_couleur.ico --buildDir build/ src/"
+  },
+  "author": "QuentinPerou",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/file-saver": "^2.0.1",
+    "file-saver": "^2.0.5",
+    "nw": "^0.51.0-sdk",
+    "nw-builder": "^3.5.7"
+  }
+}
