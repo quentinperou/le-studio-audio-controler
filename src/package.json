@@ -1,0 +1,22 @@
+{
+  "name": "Lecteur Audio - LeStudio",
+  "version": "1.2.0",
+  "description": "Un lecteur de fichier audio pour la webradio de l'iut de Laval",
+  "main": "app/main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "window": {
+    "title": "Lecteur Audio - Le Studio",
+    "icon": "app/logo_couleur.png",
+    "toolbar": true,
+    "resizable": true,
+    "width": 800,
+    "height": 1080,
+    "min-width": 800,
+    "min-height": 970
+  },
+  "keywords": [],
+  "author": "QuentinPerou",
+  "license": "ISC"
+}

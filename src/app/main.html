@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lecteur Audio - LeStudio</title>
+    <meta name="description" content="consu pour le Studio, web radio iut de laval">
+    <meta name="author" content="Quentin Pérou" />
+
+    <link rel="shortcut icon" href="logo_couleur.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/utils/Draggable.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- <link rel="stylesheet" href="main.css">-->
+</head>
+
+<body>
+    <header>
+        <div class="selectAudio">
+            <label for="audioOutput">Audio output destination: </label>
+            <select id="audioOutput"
+                title="Si vide, passe sur Chrome, refresh la page et autorise l'accès au micro"></select>
+        </div>
+        <div class="divOptionsHeader">
+            <button id="openSetting">open settings</button>
+            <button id="masquerBouton" data-state="visible">masquer les boutons</button>
+            <button id="resetAllVolume" data-state="visible">reset les volumes</button>
+        </div>
+        <p id="headerFileName" style="font-size: 13px;">Nom du fichier ouvert</p>
+    </header>
+
+    <section id="setting">
+        <h2>Settings</h2>
+        <div id="settingConteneur">
+            <div class="marginBot">
+                <input id="saveConfFile" type="button" value="Exporter la liste actuelle">
+            </div>
+            <div class="marginBot">
+                <label for="loadConfFile">Liste à charger (.json): </label>
+                <input id="loadConfFile" type="file" accept="application/JSON">
+                <button id="applyConfFile">Appliquer</button>
+            </div>
+            <div class="marginBot">
+                <button id="clearList">Vider la liste</button>
+                <button id="CreateOBStxt" title="il set met sur le bureau">Créer fichier pour OBS (audio_OBS.txt)</button>
+            </div>
+            <div class="marginBot">
+                <p style="margin: 0; text-decoration: underline; font-weight: bold;">Ajouter un son :</p>
+                <div class="flexRow">
+                    <div>
+                        <div>
+                            <label for="addNonDuSon">Nom à afficher dans la liste: </label>
+                            <input id="addNonDuSon" type="text" placeholder="nom">
+                        </div>
+                        <div>
+                            <label for="addLoadSonfFile">Fichier son: </label>
+                            <input id="addLoadSonfFile" type="file" accept="audio/*">
+                        </div>
+                        <div>
+                            <label for="addTexteObs">Texte à afficher sur OBS ? </label>
+                            <input id="addTexteObs" type="text" placeholder="Texte OBS">
+                        </div>
+                        <button id="addBoutonAjouter">Ajouter</button>
+                    </div>
+                    <div class="divPreset">
+                        <p style="margin-top: 0;">PRESET</p>
+                        <button id="addBoutonAjouterJingleStudioCool">+ Jingle Studio cool</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p style="margin: 0; text-decoration: underline; font-weight: bold;">Ajouter un Texte :</p>
+                <div>
+                    <label for="addTexteListe">Texte à afficher dans la liste: </label>
+                    <input id="addTexteListe" type="text" placeholder="nom">
+                    <button id="addBoutonAjouterTexteListe">Ajouter</button>
+                </div>
+            </div>
+        </div>
+        <button id="closeSetting">close setting</button>
+    </section>
+
+    <main>
+        <div class="infoStart">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h1>Lecteur Audio - Régie webradio Le Studio</h1>
+                <p style="margin: 0;">Dévelloppé par Quentin Pérou - étudiant en DUT MMI à l'IUT de Laval</p>
+                <img src="logo_couleur.png">
+            </div>
+            <br>
+            <p>Ho mais c'est vide ici :/</p>
+            <p>Vas dans les settings pour ajouter du contenu...<a id="leBoutonAcceuilSettings"
+                    style="color: blue; text-decoration: underline; cursor: pointer;">open settings</a></p>
+            <br>
+            <p>Les fonctionalitées :</p>
+            <ul>
+                <li>réorganiser les pistes : cliquer-glisser depuis le titre d'une piste</li>
+                <li>Clique droit sur une piste pour changer quelques réglages (ne fonctionne plus après que la lecture
+                    de la piste ait été lancé)</li>
+            </ul>
+        </div>
+
+        <div id="conteneur">
+            <!-- <figure>
+                <figcaption>Jingle Studio cool</figcaption>
+                <div class="playeur">
+                    <audio src="son/JingleStudioCool.wav" class="" data-name="Jingle Studio" data-volume="0.7" data-autofadeout="500"></audio>
+                </div>
+            </figure> -->
+
+        </div>
+
+
+        <div id="popupClickDroit">
+            <label for="popupName">Nom dans la liste</label>
+            <input id="popupName" type="text" placeholder="nom dans la liste">
+            <label for="popupDuree">Durée autofade: (en ms)</label>
+            <input id="popupDuree" type="text" placeholder="durée autofade">
+            <label for="popupTxtObs">Texte OBS:</label>
+            <input id="popupTxtObs" type="text" placeholder="text OBS">
+            <div>
+                <button id="popupValider">Valider</button>
+                <button id="popupSupp">Supprimer cette piste</button>
+            </div>
+
+            <style>
+                #popupClickDroit {
+                    z-index: 100;
+                    /* border: 2px solid #000000;*/
+                    background: #5D5D5D;
+                    border-radius: 5px;
+                    /* width: 200px;*/
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    position: absolute;
+                    padding: 10px;
+                }
+
+                #popupClickDroit label {
+                    /* text-decoration: none;*/
+                    color: white;
+                    font-weight: bold;
+                    margin: 2px 0
+                }
+
+                #popupClickDroit div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                }
+
+                #popupClickDroit #popupValider:hover,
+                #popupClickDroit #popupValider:focus {
+                    background-color: #fddb7e;
+                }
+
+                #popupValider {
+                    background-color: #eaae0d;
+                }
+
+                #popupClickDroit #popupSupp:hover,
+                #popupClickDroit #popupSupp:focus {
+                    background-color: #f07545;
+                }
+
+                #popupSupp {
+                    background-color: #f34c2e;
+                }
+
+                #popupClickDroit button {
+                    margin-top: 5px;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 3px 12px;
+                    font-weight: bold;
+                    /* color: white;*/
+                    outline: none;
+                }
+
+                #popupDuree {
+                    width: 100px;
+                    /* outline: none; */
+                }
+
+                #popupTxtObs,
+                #popupName {
+                    width: 270px;
+                    /* outline: none; */
+                }
+            </style>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>© 2021 Quentin Pérou | All rights reserved</p>
+    </footer>
+
+
+</body>
+
+</html>
