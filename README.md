@@ -2,20 +2,20 @@
 
 Application servant à lire des fichiers audio. Créer pour la gestion de la web radio de mon université.  
 
-Requirements
+## Requirements ##
 - Git : https://git-scm.com/
 
-Setup
+## Setup ##
 1. Install “node_modules”
 ```
 npm install 
 ```
-Run dev version
+### Run dev version
 ```
 npm run dev 
 ```
 
-Build project
+### Build project
 ```
 npm run prod
 ```
