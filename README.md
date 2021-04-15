@@ -4,6 +4,7 @@ Application servant à lire des fichiers audio. Créer pour la gestion de la web
 
 ## Requirements ##
 - Git : https://git-scm.com/
+- Node.js : https://nodejs.org/
 
 ## Setup ##
 1. Install “node_modules”
