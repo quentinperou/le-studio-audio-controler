@@ -15,6 +15,10 @@ Create for the playback of audio files of the web radio of my university "LeStud
 The name of the current music is written to a text file so that it can be viewed in OBS Studio.
 
 
+
+⚠️ App interface is in French.
+
+
 ## Built With
 - jQuery
 
