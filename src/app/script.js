@@ -2,32 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fs = require('fs');
 
-    //import * as fileSaver from 'file-saver';
-    // import { saveAs } from 'file-saver';
-    //var FileSaver = require('file-saver');
-
     const os = require('os');
     const path = require('path');
     const desktopDir = path.join(os.homedir(), "Desktop");
     console.log(desktopDir);
-
-
-    /********************************************************/
-
-
-    //navigator.mediaDevices.getUserMedia({ audio: true});
-    // navigator.mediaDevices.getUserMedia({
-    //     audio: true
-    // })
-    //     .then(function (stream) {
-    //         console.log('You let me use your mic!');
-    //         //document.location.reload();
-    //         //alert("actualiser la page");
-    //     })
-    //     .catch(function (err) {
-    //         console.log('No mic for you!');
-    //         alert("vous devez autoriser l'acces au micro pour avoir le choix de la sortie audio, puis actualiser la page : F5 \n(ça fonctionne uniquement sur chrome)");
-    //     });
 
     /********************** SELECTION SORTIE AUDIO **********************/
 
@@ -55,10 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (deviceInfo.kind === 'audiooutput') {
                 option.text = deviceInfo.label || `speaker ${audioOutputSelect.length + 1}`;
                 audioOutputSelect.appendChild(option);
-            }
-            //                        else {
-            //                            console.log('Some other kind of source/device: ', deviceInfo);
-            //                        }
         }
         selectors.forEach((select, selectorIndex) => {
             if (Array.prototype.slice.call(select.childNodes).some(n => n.value === values[selectorIndex])) {
@@ -105,45 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     audioOutputSelect.onchange = changeAudioDestination;
 
-
     /*************/
 
     /*********************************************************************************************/
     /*********************************************************************************************/
     var indexAudio = 0;
-
-    // $("audio").each(function (index) {
-    //     console.log("LA PARTIE DU CODE INUTILE");
-    //     let timeRestElem = $('<p/>', {
-    //         class: `timeRest`
-    //     });
-    //     timeRestElem.text("00:00");
-    //     $(this).parent().append(timeRestElem);
-    //     //                    $(this).attr('controls', '');
-    //     this.setAttribute("controls", '');
-    //     this.setAttribute("controlsList", 'nodownload');
-
-    //     if ($(this).data("volume") != undefined)
-    //         this.volume = $(this).data("volume");
-
-    //     //                    console.log($(this).attr("autofadeout"));
-    //     let check = false;
-    //     if ($(this).attr("autofadeout") != undefined)
-    //         check = true;
-
-    //     $(this).parent().parent().append(`<div class="divOptions"> <button class="boutonFadeIn" data-duree="500">Fade In 0,5s</button>
-    //                 <button class="boutonFadeOut" data-duree="500">Fade Out 0,5s</button> <button class="boutonVolumDef">Vol. par defaut</button> </div>`);
-    //     $(this).parent().parent().children(".divOptions").append(`<button class="boutonFadeIn" data-duree="2000">Fade In 2s</button> <button class="boutonFadeOut" data-duree="2000">Fade Out 2s</button> `);
-    //     $(this).parent().parent().append(` <p class="stateFade"> ––– </p> `);
-    //     $(this).parent().parent().children(".divOptions").append(`<button class="boutonEnchaine" data-duree="2000">enchainé 2s</button> `);
-
-    //     $(this).parent().parent().children(".divOptions").append(`<input title="auto Fade Out" id="${"autoFadeOut" + index}" class="checkboxAutoFadeOut" type="checkbox" ${check == true ? 'checked' : ''} > <label for="${"autoFadeOut" + index}" class="checkboxAutoFadeOutLabel">auto fade out</label> `);
-    //     indexAudio = index;
-    //     console.log("indexAudio= "+indexAudio);
-    // });
-
-
-    /******************************************* */
 
     $('.checkboxAutoFadeOut').change(checkboxAutoFadeOutChange);
 
@@ -249,8 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let ceBouton = $(this);
         let volumeOriginal = monObjet.volume;
 
-        // monObjet.volume = monVolume;
-
         monEtat.text("Fade Out START");
         ceBouton.addClass("clignotantBouton");
 
@@ -304,15 +242,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }, 20);
 
-
-
         monEtat.text("fondu enchainée: ok");
         setTimeout(function () {
             monEtat.text("–––");
         }, 3000);
     }
-
-
 
 
     $("audio").on("timeupdate", audioTimeUpdate);
@@ -350,10 +284,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             setTimeout(function () {
                                 monEtat.text("–––");
                                 e.target.volume = volumeOriginal;
-                                // monEtat.text("volume reset");
-                                // setTimeout(function () {
-                                //     monEtat.text("–––");
-                                // }, 3000);
                             }, 3000);
                         }
                     }, 20);
@@ -388,7 +318,6 @@ document.addEventListener("DOMContentLoaded", function () {
             sec = roundDecimal(secs, 3);
             return sec;
         } else
-
             return min + ':' + sec;
     }
 
@@ -400,18 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
         $(this).parent().parent().removeClass('lectureFinie');
         $(this).parent().parent().addClass('lecture');
         $(this).parent().parent().removeClass('clignotantAudio');
-        // $(this).parent().parent().removeClass('lecturePause');
-
-        //                    let count = 200;
-        //                    let increment = e.target.volume / count;
-        //                    e.target.volume = 0;
-        //
-        //                    let fade = setInterval(function() {
-        //                        e.target.volume = e.target.volume + increment;
-        //                        count--;
-        //                        if (count == 0)
-        //                            clearInterval(fade);
-        //                    }, 1);
     }
 
     $("audio").on("pause", audioPause);
@@ -435,23 +352,12 @@ document.addEventListener("DOMContentLoaded", function () {
     $(".nameDisplay").on("play", nameDisplay);
 
     function nameDisplay() {
-
         let texteObs = $(this).data("name") + " – ";
-
-        // $.post("ecrire-fichier.php", {
-        //     data: texteObs
-        // }).done(function () {
-        //     console.log("nameDisplay: ok");
-        // }).fail(function () {
-        //     console.log("ERREUR, PHP, POST fonctionne pas");
-        //     alert("ERREUR, PHP \nPOST ne fonctionne pas");
-        // });
 
         fs.writeFile(`${desktopDir}/audio_OBS.txt`, texteObs, function (err) {
             if (err) return console.log(err);
             console.log('Text OBS : ok');
         });
-
     }
 
 
@@ -603,18 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log($('#saveConfFile').parent().children('a'));
 
-        // if ($('#saveConfFile').parent().children('a').length != 0) {
-        //     let url = $('#saveConfFile').parent().children('a').attr('saveLink');
-        //     window.URL.revokeObjectURL(url);
-        //     $('#saveConfFile').parent().children('a').remove();
-        // }
-
         download(fileDl, 'LeStudio-LecteurAudio-config', 'application/JSON');
-
-
-        // var file = new File([fileDl], "LeStudio-LecteurAudio-config", { type: "application/JSON" });
-        // FileSaver.saveAs(file);
-
 
     });
 
@@ -633,7 +528,6 @@ document.addEventListener("DOMContentLoaded", function () {
             a.innerHTML = "clique droit: enregister le lien sous...";
             // a.setAttribute('saveLink', url);
             document.body.appendChild(a);
-            // document.getElementById('saveConfFile').parentElement.appendChild(a);
             a.click();
             setTimeout(function () {
                 document.body.removeChild(a);
@@ -879,8 +773,6 @@ document.addEventListener("DOMContentLoaded", function () {
     /***** TRIG AU SCROLL *****/
     $(window).scroll(function (evt) {
         popupOption.hide();
-        // settingDiv.hide();
-        // settingDiv.attr("visible", false);
     });
 
     /*************************************************************** */
@@ -893,8 +785,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /*************************************************************** */
-
-    // var win = nw.Window.get();
-    // win.showDevTools();
 
 });
