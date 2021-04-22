@@ -1,4 +1,4 @@
-# le-studio-audio-controler
+# Le-Studio-audio-controler
 
 * __FR__
 
@@ -17,6 +17,9 @@ The name of the current music is written to a text file so that it can be viewed
 ---
 
 ⚠️ App interface is in French.
+
+<!-- ![](https://pbs.twimg.com/media/ErmTAIGXIAIk1Vb?format=png&name=medium) -->
+ <img src='https://pbs.twimg.com/media/ErmTAIGXIAIk1Vb?format=png&name=medium' width='50%'> 
 
 
 ## Built With
