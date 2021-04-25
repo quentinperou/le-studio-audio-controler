@@ -14,6 +14,11 @@ Create for the playback of audio files of the web radio of my university "LeStud
 
 The name of the current music is written to a text file so that it can be viewed in OBS Studio.
 
+
+---
+Web-radio here :
+https://www.twitch.tv/le_studio
+
 ---
 
 ⚠️ App interface is in French.
