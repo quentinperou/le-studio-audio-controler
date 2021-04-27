@@ -24,8 +24,8 @@ https://www.twitch.tv/le_studio
 ⚠️ App interface is in French.
 
 <!-- ![](https://pbs.twimg.com/media/ErmTAIGXIAIk1Vb?format=png&name=medium) -->
- <img src='.github/screenshot1.png' width='50%'>
- <img src='.github/screenshot2.png' width='50%'>
+ <img src='.github/screenshot1.png' width='60%'>
+ <img src='.github/screenshot2.png' width='70%'>
  
  
 
